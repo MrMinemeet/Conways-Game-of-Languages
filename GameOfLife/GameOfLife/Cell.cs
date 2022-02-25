@@ -49,16 +49,9 @@ public class Cell {
 	}
 
 	public void Draw() {
-		/*
 		if(IsAlive)
 			Console.Write('■');
 		else
 			Console.Write('□');
-		*/
-		
-		if(IsAlive)
-			Console.Write("😁");
-		else
-			Console.Write("💀");
 	}
 }
