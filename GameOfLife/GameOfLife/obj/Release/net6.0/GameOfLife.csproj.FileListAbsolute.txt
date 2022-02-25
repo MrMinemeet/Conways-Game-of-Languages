@@ -1,0 +1,15 @@
+/home/mrminemeet/GoogleDrive/Freizeit/Programmierung/C-Sharp/GameOfLife/GameOfLife/bin/Release/net6.0/GameOfLife
+/home/mrminemeet/GoogleDrive/Freizeit/Programmierung/C-Sharp/GameOfLife/GameOfLife/bin/Release/net6.0/GameOfLife.deps.json
+/home/mrminemeet/GoogleDrive/Freizeit/Programmierung/C-Sharp/GameOfLife/GameOfLife/bin/Release/net6.0/GameOfLife.runtimeconfig.json
+/home/mrminemeet/GoogleDrive/Freizeit/Programmierung/C-Sharp/GameOfLife/GameOfLife/bin/Release/net6.0/GameOfLife.dll
+/home/mrminemeet/GoogleDrive/Freizeit/Programmierung/C-Sharp/GameOfLife/GameOfLife/bin/Release/net6.0/GameOfLife.pdb
+/home/mrminemeet/GoogleDrive/Freizeit/Programmierung/C-Sharp/GameOfLife/GameOfLife/obj/Release/net6.0/GameOfLife.csproj.AssemblyReference.cache
+/home/mrminemeet/GoogleDrive/Freizeit/Programmierung/C-Sharp/GameOfLife/GameOfLife/obj/Release/net6.0/GameOfLife.GeneratedMSBuildEditorConfig.editorconfig
+/home/mrminemeet/GoogleDrive/Freizeit/Programmierung/C-Sharp/GameOfLife/GameOfLife/obj/Release/net6.0/GameOfLife.AssemblyInfoInputs.cache
+/home/mrminemeet/GoogleDrive/Freizeit/Programmierung/C-Sharp/GameOfLife/GameOfLife/obj/Release/net6.0/GameOfLife.AssemblyInfo.cs
+/home/mrminemeet/GoogleDrive/Freizeit/Programmierung/C-Sharp/GameOfLife/GameOfLife/obj/Release/net6.0/GameOfLife.csproj.CoreCompileInputs.cache
+/home/mrminemeet/GoogleDrive/Freizeit/Programmierung/C-Sharp/GameOfLife/GameOfLife/obj/Release/net6.0/GameOfLife.dll
+/home/mrminemeet/GoogleDrive/Freizeit/Programmierung/C-Sharp/GameOfLife/GameOfLife/obj/Release/net6.0/refint/GameOfLife.dll
+/home/mrminemeet/GoogleDrive/Freizeit/Programmierung/C-Sharp/GameOfLife/GameOfLife/obj/Release/net6.0/GameOfLife.pdb
+/home/mrminemeet/GoogleDrive/Freizeit/Programmierung/C-Sharp/GameOfLife/GameOfLife/obj/Release/net6.0/GameOfLife.genruntimeconfig.cache
+/home/mrminemeet/GoogleDrive/Freizeit/Programmierung/C-Sharp/GameOfLife/GameOfLife/obj/Release/net6.0/ref/GameOfLife.dll
