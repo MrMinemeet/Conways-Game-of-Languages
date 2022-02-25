@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/mrminemeet/GoogleDrive/Freizeit/Programmierung/C-Sharp/GameOfLife/GameOfLife/GameOfLife.csproj": {}
+    "/home/mrminemeet/Dokumente/GitHub/Conways Game of Languages/GameOfLife/GameOfLife/GameOfLife.csproj": {}
   },
   "projects": {
-    "/home/mrminemeet/GoogleDrive/Freizeit/Programmierung/C-Sharp/GameOfLife/GameOfLife/GameOfLife.csproj": {
+    "/home/mrminemeet/Dokumente/GitHub/Conways Game of Languages/GameOfLife/GameOfLife/GameOfLife.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/mrminemeet/GoogleDrive/Freizeit/Programmierung/C-Sharp/GameOfLife/GameOfLife/GameOfLife.csproj",
+        "projectUniqueName": "/home/mrminemeet/Dokumente/GitHub/Conways Game of Languages/GameOfLife/GameOfLife/GameOfLife.csproj",
         "projectName": "GameOfLife",
-        "projectPath": "/home/mrminemeet/GoogleDrive/Freizeit/Programmierung/C-Sharp/GameOfLife/GameOfLife/GameOfLife.csproj",
+        "projectPath": "/home/mrminemeet/Dokumente/GitHub/Conways Game of Languages/GameOfLife/GameOfLife/GameOfLife.csproj",
         "packagesPath": "/home/mrminemeet/.nuget/packages/",
-        "outputPath": "/home/mrminemeet/GoogleDrive/Freizeit/Programmierung/C-Sharp/GameOfLife/GameOfLife/obj/",
+        "outputPath": "/home/mrminemeet/Dokumente/GitHub/Conways Game of Languages/GameOfLife/GameOfLife/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/mrminemeet/.nuget/NuGet/NuGet.Config"
