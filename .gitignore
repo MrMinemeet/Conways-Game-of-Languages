@@ -1,2 +1,5 @@
 
 *.cache
+
+GameOfLife/GameOfLife/bin/Debug/
+GameOfLife/GameOfLife/bin/Release/
