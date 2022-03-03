@@ -58,10 +58,6 @@ public class Board {
 				int cL = (col > 0) ? col - 1 : -1;
 				int cR = (col < cols - 1) ? col + 1 : -1;
 				
-				// Set neighbours
-				if(row == 1 && col == 2) 
-					Console.Write("");
-				
 				Cells[row, col].AddNeighbours(row, col, rT, rB, cL, cR, Cells);
 			}
 		}
