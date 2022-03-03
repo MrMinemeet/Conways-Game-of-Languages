@@ -26,9 +26,9 @@ class Cell:
 
     def draw(self):
         if(self.alive):
-            print("■", end=" ")
+            print("😀", end=" ")
         else:
-            print("□", end=" ")
+            print("💀", end=" ")
 
     def addNeighbours(self, row, col, rT, rB, cL, cR, cells):
         if rT != -1 and cL != -1:
@@ -123,13 +123,13 @@ class Board:
 
 
 def main():
-    board = Board(170, 300, .3, random.randint(0, 100))
+    board = Board(40, 40, .3, random.randint(0, 100))
     os.system("clear")
 
     while(True):
         board.draw()
         board.Step()
-        time.sleep(.5)
+        time.sleep(.1)
 
 
 
