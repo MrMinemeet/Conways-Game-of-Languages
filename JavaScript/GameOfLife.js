@@ -9,42 +9,49 @@ class Cell {
     }
 
     addNeighbour(row, col, rT, rB, cL, cR, cells) {
-		
-		if(rT != -1 && cL != -1)
-			neighbours.Add(cells[rT, cL]);
-		if(rT != -1 && cR != -1)
-			neighbours.Add(cells[rT, cR]);
-		if (rT != -1)
-			neighbours.Add(cells[rT, col]);
+		if(rT != -1 && cL != -1) {
+            this.neighbours.push(cells[rT][cL]);
+        }
+		if(rT != -1 && cR != -1) {
+            this.neighbours.push(cells[rT][cR]);
+        }
+		if (rT != -1) {
+            this.neighbours.push(cells[rT][col]);
+        }
 			
 		
-		if (cL != -1)
-			neighbours.Add(cells[row, cL]);
-		if (cR != -1)
-			neighbours.Add(cells[row, cR]);
-		
+		if (cL != -1) {
+			this.neighbours.push(cells[row][cL]);
+        }
+		if (cR != -1) {
+			this.neighbours.push(cells[row][cR]);
+        }
 
-		if(rB != -1 && cL != -1)
-			neighbours.Add(cells[rB, cL]);
-		if(rB != -1 && cR != -1)
-			neighbours.Add(cells[rB, cR]);
-		if (rB != -1)
-			neighbours.Add(cells[rB, col]);
+
+		if(rB != -1 && cL != -1) {
+            this.neighbours.push(cells[rB][cL]);
+        }
+		if(rB != -1 && cR != -1) {
+            this.neighbours.push(cells[rB][cR]);
+        }
+		if (rB != -1) {
+            this.neighbours.push(cells[rB][col]);
+        }
     }
 
     calculateNextState() {
         let aliveNeighbours = 0;
 
         for (let neighbour of this.neighbours) {
-            if (neighbour.alive) {
+            if (neighbour.isAlive) {
                 aliveNeighbours++;
             }
         }
 
         if(this.isAlive) {
-            this.isAliveNext = aliveNeighbours == 2 || aliveNeighbours == 3;
+            this.isAliveNext = (aliveNeighbours == 2 || aliveNeighbours == 3);
         } else {
-            this.isAliveNext = aliveNeighbours == 3;
+            this.isAliveNext = (aliveNeighbours == 3);
         }
     }
 
@@ -71,6 +78,7 @@ class Board {
         this.cells = new Array(rows).fill(0).map(() => new Array(cols).fill(0).map(() => new Cell(false)));
 
         this.placeRandom(density, seed);
+        this.linkNeighbours();
     }
 
     linkNeighbours() {
@@ -79,15 +87,15 @@ class Board {
 		 * row, cL	| row, col	| row, cR
 		 * rB, cL	| rB, col	| rB, cR
 		 */
-        for(let i = 0; i < this.rows; i++) {
-            for(let j = 0; j < this.cols; j++) {
+        for(let row = 0; row < this.rows; row++) {
+            for(let col = 0; col < this.cols; col++) {
                 let rT = (row > 0) ? row - 1 : -1;
                 let rB = (row < this.rows - 1) ? row + 1 : -1;
         
                 let cL = (col > 0) ? col - 1 : - 1;
-                let cR = (col < cols - 1) ? row + 1 : -1;
+                let cR = (col < this.cols - 1) ? row + 1 : -1;
 
-                cells[row][col].addNeighbour(row, col, rT, rB, cL, rB, cells);
+                this.cells[row][col].addNeighbour(row, col, rT, rB, cL, rB, this.cells);
             }
         }
 
@@ -126,19 +134,32 @@ class Board {
             console.log();
         }
     }
+
+    allDead() {
+        for(let i = 0; i < this.rows; i++) {
+            for(let j = 0; j < this.cols; j++) {
+                if(this.cells[i][j].isAlive) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
 }
 
 
 
 
-let board = new Board(10, 10, .3, Math.random(0, 100));
+let board = new Board(90, 150, .3, Math.random(0, 100));
 //console.table(board.cells);
 console.clear();
-board.draw();
 
-//while(true) {
-    setInterval(() => {
-        board.draw();
-        board.step();    
-    },1000);
-//}
+setInterval(() => {
+    board.draw();
+    if(board.allDead()) {
+        console.log("All dead");
+        process.exit();
+    }
+    board.step(); 
+}, 1000);
