@@ -26,9 +26,9 @@ class Cell:
 
     def draw(self):
         if(self.alive):
-            print("😀", end=" ")
+            print("😀", end="")
         else:
-            print("💀", end=" ")
+            print("💀", end="")
 
     def addNeighbours(self, row, col, rT, rB, cL, cR, cells):
         if rT != -1 and cL != -1:
@@ -114,6 +114,13 @@ class Board:
                 self.cells[row][col].draw()
             print()
 
+    def allDead(self):
+        for row in range(self.rows):
+            for col in range(self.cols):
+                if self.cells[row][col].alive:
+                    return False
+        return True
+
 
 
 
@@ -125,9 +132,13 @@ class Board:
 def main():
     board = Board(40, 40, .3, random.randint(0, 100))
     os.system("clear")
-
+    
     while(True):
         board.draw()
+        if(board.allDead()):
+            print("All dead")
+            exit()
+
         board.Step()
         time.sleep(.1)
 

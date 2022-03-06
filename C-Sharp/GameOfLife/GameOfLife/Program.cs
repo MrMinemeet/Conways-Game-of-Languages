@@ -5,8 +5,8 @@ namespace HelloWorld
 	class Program
 	{
 		static void Main(string[] args) {
-			int rows = int.Parse(args[0]);
-			int cols = int.Parse(args[1]);
+			const int rows = 40;
+			const int cols = 40;
 			
 			Board board = new Board(rows, cols, 0.3, new Random().Next());
 			Console.Clear();
@@ -20,7 +20,7 @@ namespace HelloWorld
 				}
 				
 				board.Step();
-				Thread.Sleep(200);
+				Thread.Sleep(100);
 				i++;
 			}
 		}

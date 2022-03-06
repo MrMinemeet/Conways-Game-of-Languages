@@ -151,7 +151,7 @@ class Board {
 
 
 
-let board = new Board(90, 150, .3, Math.random(0, 100));
+let board = new Board(40, 40, .3, Math.random(0, 100));
 //console.table(board.cells);
 console.clear();
 
@@ -161,5 +161,6 @@ setInterval(() => {
         console.log("All dead");
         process.exit();
     }
+
     board.step(); 
-}, 1000);
+}, 100);
