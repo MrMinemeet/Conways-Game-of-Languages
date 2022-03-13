@@ -9,3 +9,5 @@ GameOfLife/GameOfLife/obj/Release/
 CPP/GameOfLife/cmake-build-debug
 
 CPP/GameOfLife/.idea/
+
+CPP/GameOfLife/cmake-build-release/
