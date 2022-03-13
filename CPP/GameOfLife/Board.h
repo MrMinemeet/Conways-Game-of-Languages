@@ -18,7 +18,7 @@ public:
 	~Board(); // Destructor
 
 	void Step();
-	void Draw();
+	void Draw(bool full_draw);
 };
 
 

@@ -37,9 +37,10 @@ int main(int argc, char* argv[]) {
 
 
 	printf(CLEAR);
+	board->Draw(true);
 
 	while(true) {
-		board->Draw();
+		board->Draw(false);
 		board->Step();
 		std::this_thread::sleep_for(std::chrono::milliseconds(WAIT_TIME_MS));
 	}

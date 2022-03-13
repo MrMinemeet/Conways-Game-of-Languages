@@ -2,7 +2,7 @@
 #include <cstdio>
 #include "Board.h"
 
-#define MOVE_UP "\033[2;1H"
+#define MOVE_UP "\033[1;1H"
 #define MAX_VAL 100
 
 Board::Board(unsigned int rows, unsigned int cols, float density, unsigned int seed) {
@@ -81,12 +81,18 @@ void Board::Step() {
 	}
 }
 
-void Board::Draw() {
+void Board::Draw(bool full_draw) {
 	printf(MOVE_UP);
 	for(int row = 0; row < rows; ++row) {
 		for(int col = 0; col < cols; ++col) {
-			cells[row][col].Draw();
-			printf(" ");
+			if(full_draw) {
+				cells[row][col].Draw();
+				printf(" ");
+			} else if(cells[row][col].changed) {
+				printf("\033[%d;%dH", row + 1, col * 2 + 1);
+				cells[row][col].Draw();
+				printf(" ");
+			}
 		}
 		printf("\n");
 	}

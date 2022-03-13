@@ -8,6 +8,7 @@ private:
 
 public:
 	bool is_alive;
+	bool changed;
 
 	Cell(); // Constructor
 
