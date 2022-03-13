@@ -1,5 +1,5 @@
 # Conway's Game of Languages
----
+
 This repository contains a implementation for [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) in multiple languages.
 
 ## Goal
