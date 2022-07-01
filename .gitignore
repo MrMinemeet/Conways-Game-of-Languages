@@ -11,3 +11,7 @@ CPP/GameOfLife/cmake-build-debug
 CPP/GameOfLife/.idea/
 
 CPP/GameOfLife/cmake-build-release/
+
+Go/.vscode/
+
+Go/.idea/
