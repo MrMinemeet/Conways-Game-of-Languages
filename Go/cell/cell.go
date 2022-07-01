@@ -19,7 +19,7 @@ type Cell struct {
 func New(isAlive bool) Cell {
 	c := Cell{
 		IsAlive:     isAlive,
-		HasChanged:  false,
+		HasChanged:  true,
 		isAliveNext: isAlive,
 	}
 

@@ -3,27 +3,31 @@ package main
 import (
 	"CGoL/board"
 	tm "github.com/buger/goterm" // Advanced terminal manipulation
-	"os"
+	//"os"
 	"time"
-	"strconv"
+	//"strconv"
 )
 
 const WAIT_TIME_MS int = 300
 
 func main() {
+	/*
 	argsWithoutProg := os.Args[1:]
 	
 	height, _ := strconv.Atoi(argsWithoutProg[0])
 	width, _ := strconv.Atoi(argsWithoutProg[1])
+	*/
+	var width = 5
+	var height = 5
 
 	b := board.New(height, width)
 
 	tm.Clear()
 	tm.MoveCursor(1, 1)
-	b.Draw(true)
 	tm.Flush()
+	b.Draw(true)
 
-	for true {
+	for {
 		tm.MoveCursor(1, 1) // Move cursor to the top left corner
 		b.Draw(false)
 		tm.Flush()

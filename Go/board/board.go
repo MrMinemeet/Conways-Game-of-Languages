@@ -43,18 +43,17 @@ func (b Board) Step() {
 }
 
 func (b Board) Draw(fullDraw bool) {
-	fullDraw = true // TODO: Partial drawing needs fixing
+	//fullDraw = true // TODO: Partial drawing needs fixing
 	for row := 0; row < b.rows; row++ {
 		for col := 0; col < b.cols; col++ {
 			if fullDraw {
 				b.Cells[row][col].Draw()
 			} else if b.Cells[row][col].HasChanged {
-				tm.MoveCursor(row, col * 2)
+				tm.MoveCursor(col * 2 + 1, row + 1)
 				tm.Flush()
 				b.Cells[row][col].Draw()
 			}
 			fmt.Print(" ")
-			tm.Flush()
 		}
 		fmt.Println()
 		tm.Flush()
