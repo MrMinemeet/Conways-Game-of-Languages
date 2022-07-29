@@ -34,7 +34,9 @@ func (c *Cell) CalculateNextStep(aliveNeighbours byte) {
 		c.isAliveNext = aliveNeighbours == 3
 	}
 
-	if c.IsAlive != c.isAliveNext {
+	if c.IsAlive == c.isAliveNext {
+		c.HasChanged = false
+	} else {
 		c.HasChanged = true
 	}
 }

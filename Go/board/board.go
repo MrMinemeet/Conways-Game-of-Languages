@@ -3,9 +3,8 @@ package board
 import (
 	"CGoL/cell"
 	"fmt"
-	"math/rand"
-
 	tm "github.com/buger/goterm" // Advanced terminal manipulation
+	"math/rand"
 )
 
 type Board struct {
@@ -13,13 +12,16 @@ type Board struct {
 
 	rows int
 	cols int
+
+	seed int64
 }
 
-func New(rows int, cols int) Board {
+func New(rows int, cols int, seed int64) Board {
 	b := Board{
 		Cells: makeCells(rows, cols),
 		rows:  rows,
 		cols:  cols,
+		seed:  seed,
 	}
 
 	b.placeRandom(0.3, 1)
@@ -44,16 +46,18 @@ func (b Board) Step() {
 
 func (b Board) Draw(fullDraw bool) {
 	//fullDraw = true // TODO: Partial drawing needs fixing
+	tm.MoveCursor(1, 1)
+	tm.Flush()
 	for row := 0; row < b.rows; row++ {
 		for col := 0; col < b.cols; col++ {
 			if fullDraw {
 				b.Cells[row][col].Draw()
+				fmt.Print(" ")
 			} else if b.Cells[row][col].HasChanged {
-				tm.MoveCursor(col * 2 + 1, row + 1)
+				tm.MoveCursor(col*2+1, row+1)
 				tm.Flush()
 				b.Cells[row][col].Draw()
 			}
-			fmt.Print(" ")
 		}
 		fmt.Println()
 		tm.Flush()
@@ -81,6 +85,17 @@ func (b Board) placeRandom(density float32, seed int64) {
 		}
 	}
 
+}
+
+func (b Board) DidAnyChange() bool {
+	for row := 0; row < b.rows; row++ {
+		for col := 0; col < b.cols; col++ {
+			if b.Cells[row][col].HasChanged {
+				return true
+			}
+		}
+	}
+	return false
 }
 
 func (b Board) getAliveNeighbours(row int, col int) byte {
