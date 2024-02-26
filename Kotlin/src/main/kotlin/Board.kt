@@ -1,5 +1,3 @@
-package org.example
-
 import kotlin.random.Random
 
 class Board (rows: Int, cols: Int, density: Float = 0.1f, seed: Int = 1) {
@@ -8,8 +6,8 @@ class Board (rows: Int, cols: Int, density: Float = 0.1f, seed: Int = 1) {
 		val random = Random(seed)
 		cells = Array(rows) { Array(cols) { Cell(random.nextFloat() < density) } }
 
-		// TODO: Add neighbor references to cells
-
+		// Add neighbor references to cells
+		addNeighbors()
 	}
 
 	/**
@@ -36,5 +34,33 @@ class Board (rows: Int, cols: Int, density: Float = 0.1f, seed: Int = 1) {
 	 */
 	fun isAtEnd(): Boolean {
 		return cells.all { row -> row.all { !it.isAlive } }
+	}
+
+	/**
+	 * Add neighbor references to the cells in the board.
+	 */
+	private fun addNeighbors() {
+		// For each cell
+		for (cellRow in cells.indices) {
+			for (cellCol in cells[cellRow].indices) {
+				val neighbors = mutableListOf<Cell>()
+				// Go through each neighbor-offset
+				for (rowOffset in -1..1) {
+					for (colOffset in -1..1) {
+						val neighborRow = cellRow + rowOffset
+						val neighborCol = cellCol + colOffset
+						// If the neighbor is within the bounds of the board and not the cell itself
+						if (!(rowOffset == 0 && colOffset == 0) &&
+							neighborRow in cells.indices &&
+							neighborCol in cells[cellRow].indices)
+						{
+							neighbors.add(cells[neighborRow][neighborCol])
+						}
+					}
+				}
+				// Set the neighbors of the cell
+				cells[cellRow][cellCol].setNeighbors(neighbors[0], *neighbors.drop(1).toTypedArray())
+			}
+		}
 	}
 }
