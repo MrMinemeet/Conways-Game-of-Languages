@@ -1,5 +1,5 @@
 [package]
-name = "Rust_CGoL"
+name = "rust_cgol"
 version = "0.1.0"
 edition = "2021"
 
