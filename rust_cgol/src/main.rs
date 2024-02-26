@@ -1,7 +1,15 @@
 mod board;
 mod cell;
 
+use std::{thread, time};
+
 fn main() {
-	println!("Hello, world!"); // println is a makro, therefore it needs the exclamation mark https://stackoverflow.com/a/29611728/8527195
+	let mut board = board::Board::new();
+	println!("{}", board.to_string());
+	for _ in 0..500 {
+		board.step();
+		println!("{}", board.to_string());
+		thread::sleep(time::Duration::from_millis(500));
+	}
 }
 
