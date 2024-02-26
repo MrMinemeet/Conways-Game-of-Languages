@@ -13,9 +13,16 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 }
 
-tasks.test {
-    useJUnitPlatform()
+tasks.jar {
+    manifest.attributes["Main-Class"] = "MainKt"
+    val dependencies = configurations
+        .runtimeClasspath
+        .get()
+        .map(::zipTree) // OR .map { zipTree(it) }
+    from(dependencies)
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
+
 kotlin {
     jvmToolchain(21)
 }
