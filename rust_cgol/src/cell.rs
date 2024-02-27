@@ -1,3 +1,4 @@
+use std::fmt::Display;
 
 #[derive(Clone, Copy)]
 pub struct Cell {
@@ -5,13 +6,14 @@ pub struct Cell {
     is_alive_next: bool,
 }
 
-impl ToString for Cell {
-    fn to_string(&self) -> String {
-        if self.is_alive {
+impl Display for Cell {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let str = if self.is_alive {
             "😀".to_string()
         } else {
             "💀".to_string()
-        }
+        };
+        write!(f, "{}", str)
     }
 }
 

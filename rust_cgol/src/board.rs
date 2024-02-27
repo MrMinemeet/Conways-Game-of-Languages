@@ -1,3 +1,4 @@
+use std::fmt::Display;
 use crate::cell::Cell;
 use rand::Rng;
 
@@ -80,8 +81,8 @@ impl Board {
     }
 }
 
-impl ToString for Board {
-    fn to_string(&self) -> String {
+impl Display for Board {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut result = String::new();
         for row in 0..ROWS {
             for col in 0..COLS {
@@ -90,6 +91,6 @@ impl ToString for Board {
             }
             result.push_str("\n");
         }
-        result
+        write!(f, "{}", result)
     }
 }
