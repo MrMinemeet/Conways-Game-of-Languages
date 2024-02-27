@@ -19,7 +19,10 @@ impl Display for Cell {
 
 impl Cell {
     pub fn new() -> Cell {
-        Cell { is_alive: false, is_alive_next: false }
+        Cell {
+            is_alive: false,
+            is_alive_next: false,
+        }
     }
 
     pub fn step(&mut self) {

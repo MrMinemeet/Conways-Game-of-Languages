@@ -1,14 +1,13 @@
-use std::fmt::Display;
 use crate::cell::Cell;
 use rand::Rng;
-
+use std::fmt::Display;
 
 const ROWS: usize = 10;
 const COLS: usize = 10;
 
 #[derive(Clone, Copy)]
 pub struct Board {
-    cells: [[Cell; COLS]; ROWS]
+    cells: [[Cell; COLS]; ROWS],
 }
 
 impl Board {
@@ -38,7 +37,7 @@ impl Board {
         }
     }
 
-    fn place_random(& mut self, density: f32, _seed: u64) {
+    fn place_random(&mut self, density: f32, _seed: u64) {
         // Generate rng
         // TODO: Use seed
         let mut rng = rand::thread_rng();
@@ -55,7 +54,8 @@ impl Board {
         let mut neighbors = 0;
 
         // Go through neighbor-offset
-        for row_offset in -1i8..=1 { // Xi8 sets type to i8 (type like "rowOffset:i8" not possible)
+        for row_offset in -1i8..=1 {
+            // Xi8 sets type to i8 (type like "rowOffset:i8" not possible)
             for col_offset in -1i8..=1 {
                 // Don't compare with itself
                 if row_offset == 0 || col_offset == 0 {
@@ -66,9 +66,12 @@ impl Board {
                 let col_neighbor = *col as isize + col_offset as isize;
 
                 // Check if neighbor is within bounds
-                if row_neighbor < 0 || ROWS as isize <= row_neighbor ||
-                    col_neighbor < 0 || COLS as isize <= col_neighbor {
-                    continue
+                if row_neighbor < 0
+                    || ROWS as isize <= row_neighbor
+                    || col_neighbor < 0
+                    || COLS as isize <= col_neighbor
+                {
+                    continue;
                 }
                 let cell = self.cells[row_neighbor as usize][col_neighbor as usize];
                 if cell.is_alive {
