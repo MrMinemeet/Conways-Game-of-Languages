@@ -1,99 +1,107 @@
-#include <cstdlib>
-#include <cstdio>
+// Copyright (c) 2025 Alexander Voglsperger.
+// This code is licensed under the MIT license.
+
 #include "Board.h"
+
+#include <cstdio>
+#include <cstdlib>
+#include <sys/types.h>
 
 #define MOVE_UP "\033[1;1H"
 #define MAX_VAL 100
 
-Board::Board(unsigned int rows, unsigned int cols, float density, unsigned int seed) {
-	this->rows = rows;
-	this->cols = cols;
+namespace impl {
+	Board::Board(const uint rows, const uint cols, const float density, const uint seed):
+		rows(rows), cols(cols) {
 
-	// Create array
-	cells = new Cell*[this->rows];
-	for(int row = 0; row < this->rows; row++) {
-		cells[row] = new Cell[this->cols];
-	}
-
-	PlaceRandom(density, seed);
-}
-
-Board::~Board() {
-	for(int row = 0; row < rows; ++row) {
-		delete(cells[row]);
-	}
-	delete(cells);
-}
-
-void Board::PlaceRandom(float density, unsigned int seed) {
-	// Initialize prn with seed
-	srand(seed);
-
-	const int real_density = (int)(density * MAX_VAL);
-
-	// Randomly place alive cells
-	for(int row = 0; row < rows; ++row) {
-		for(int col = 0; col < cols; ++col) {
-			int rnd = rand() % MAX_VAL;
-			cells[row][col].is_alive = rnd < real_density;
+		// Initialize cells
+		cells.resize(rows);
+		for (uint row = 0; row < rows; ++row) {
+			std::vector<Cell> row_cells;
+			row_cells.reserve(cols);
+			for (uint col = 0; col < cols; ++col) {
+				row_cells.emplace_back();
+			}
+			cells[row] = row_cells;
 		}
+
+		PlaceRandom(density, seed);
 	}
-	printf("\n\n");
-}
 
-void Board::Step() {
-	for(int row = 0; row < rows; ++row) {
-		for(int col = 0; col < cols; ++col) {
+	// ===========================================================================================================
+	void Board::PlaceRandom(const float density, const uint seed) {
+		// Initialize prn with seed
+		srand(seed);
 
-			// Calculate neighbours of current cell which are alive
-			int alive_neighbours = 0;
-			for(int i = -1; i <= 1; ++i) {
-				for(int j = -1; j <= 1; ++j) {
-					if(i == 0 && j == 0) {
-						continue;
-					}
+		const int real_density = static_cast<int>(density * MAX_VAL);
 
-					int neighbour_row = row + i;
-					int neighbour_col = col + j;
+		// Randomly place alive cells
+		for(int row = 0; row < rows; ++row) {
+			for(int col = 0; col < cols; ++col) {
 
-					if(neighbour_row < 0 || neighbour_row >= rows) {
-						continue;
-					}
+				const int rnd = rand() % MAX_VAL; // NOLINT(*-msc50-cpp)
+				cells[row][col].SetAlive(rnd < real_density);
+			}
+		}
+		printf("\n\n");
+	}
 
-					if(neighbour_col < 0 || neighbour_col >= cols) {
-						continue;
-					}
+	// ===========================================================================================================
+	void Board::Step() {
+		for(int row = 0; row < rows; ++row) {
+			for(int col = 0; col < cols; ++col) {
 
-					if(cells[neighbour_row][neighbour_col].is_alive) {
-						alive_neighbours++;
+				// Calculate neighbours of current cell which are alive
+				uint alive_neighbours = 0;
+				for(int i = -1; i <= 1; ++i) {
+					for(int j = -1; j <= 1; ++j) {
+						if(i == 0 && j == 0) {
+							continue;
+						}
+
+						const int neighbour_row = row + i;
+						const int neighbour_col = col + j;
+
+						if(neighbour_row < 0 || neighbour_row >= rows) {
+							continue;
+						}
+
+						if(neighbour_col < 0 || neighbour_col >= cols) {
+							continue;
+						}
+
+						if(cells[neighbour_row][neighbour_col].IsAlive()) {
+							alive_neighbours++;
+						}
 					}
 				}
-			}
 
-			cells[row][col].CalculateNextStep(alive_neighbours);
+				cells[row][col].CalculateNextStep(alive_neighbours);
+			}
+		}
+
+		for(int row = 0; row < rows; ++row) {
+			for(int col = 0; col < cols; ++col) {
+				cells[row][col].Step();
+			}
 		}
 	}
 
-	for(int row = 0; row < rows; ++row) {
-		for(int col = 0; col < cols; ++col) {
-			cells[row][col].Step();
-		}
-	}
-}
-
-void Board::Draw(bool full_draw) {
-	printf(MOVE_UP);
-	for(int row = 0; row < rows; ++row) {
-		for(int col = 0; col < cols; ++col) {
-			if(full_draw) {
-				cells[row][col].Draw();
-				printf(" ");
-			} else if(cells[row][col].changed) {
-				printf("\033[%d;%dH", row + 1, col * 2 + 1);
-				cells[row][col].Draw();
-				printf(" ");
+	// ===========================================================================================================
+	void Board::Draw(const bool full_draw) const {
+		printf(MOVE_UP);
+		for(int row = 0; row < rows; ++row) {
+			for(int col = 0; col < cols; ++col) {
+				if(full_draw) {
+					cells[row][col].Draw();
+					printf(" ");
+				} else if(cells[row][col].Changed()) {
+					printf("\033[%d;%dH", row + 1, col * 2 + 1);
+					cells[row][col].Draw();
+					printf(" ");
+				}
 			}
+			printf("\n");
 		}
-		printf("\n");
 	}
 }

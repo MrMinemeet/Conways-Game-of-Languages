@@ -1,22 +1,23 @@
-#ifndef GAMEOFLIFE_CELL_H
-#define GAMEOFLIFE_CELL_H
+// Copyright (c) 2025 Alexander Voglsperger.
+// This code is licensed under the MIT license.
 
+#pragma once
 
-class Cell {
-private:
-	bool is_alive_next;
+namespace impl {
+	class Cell {
+		bool is_alive_next;
+		bool is_alive;
+		bool changed;
 
-public:
-	bool is_alive;
-	bool changed;
+	public:
+		Cell(); // Constructor
 
-	Cell(); // Constructor
-
-	// Methods
-	void CalculateNextStep(unsigned short alive_neighbours);
-	void Step();
-	void Draw() const;
-};
-
-
-#endif //GAMEOFLIFE_CELL_H
+		// Methods
+		void CalculateNextStep(unsigned short alive_neighbours);
+		void Step();
+		void Draw() const;
+		void SetAlive(bool alive);
+		[[nodiscard]] bool IsAlive() const;
+		[[nodiscard]] bool Changed() const;
+	};
+}

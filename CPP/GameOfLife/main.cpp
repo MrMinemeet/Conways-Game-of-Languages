@@ -1,42 +1,29 @@
-#include "Board.h"
-#include <thread>
-#include <cstdio>
+// Copyright (c) 2025 Alexander Voglsperger.
+// This code is licensed under the MIT license.
+
+#include <cstdint>
+#include <memory>
 #include <string>
-#include <csignal>
+#include <thread>
 
-#define WAIT_TIME_MS 100
+#include "Board.h"
 
-#define CLEAR "\033[2J"
+using namespace impl;
 
-Board* board;
+constexpr uint16_t WAIT_TIME_MS = 100;
+constexpr std::string CLEAR_SYMBOL = "\033[2J";
 
-void signalHandler(int signum) {
-	printf("Interrupt signal (%d) received.\n", signum);
-
-	printf("Freeing up board");
-	delete(board);
-
-	exit(signum);
-}
-
-
-int main(int argc, char* argv[]) {
+[[noreturn]] int main(const int argc, char* argv[]) {
 	if(argc != 3) {
-		printf("Arguments required: rows cols\n");
-		return 1;
+		throw std::invalid_argument("Expected to have 'rows' and 'cols' as arguments");
 	}
-
-	// Register signal handler for Interrupt
-	signal(SIGINT, signalHandler);
-
 
 	const int rows = std::stoi(argv[1]);
 	const int cols = std::stoi(argv[2]);
 
-	board = new Board(rows, cols);
+	const auto board = std::make_shared<Board>(rows, cols);
 
-
-	printf(CLEAR);
+	printf(CLEAR_SYMBOL.c_str());
 	board->Draw(true);
 
 	while(true) {
