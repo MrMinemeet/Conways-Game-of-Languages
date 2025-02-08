@@ -1,25 +1,24 @@
-#ifndef GAMEOFLIFE_BOARD_H
-#define GAMEOFLIFE_BOARD_H
+#pragma once
 
+#include <vector>
+#include <sys/types.h>
 
 #include "Cell.h"
 
-class Board {
-private:
-	unsigned int rows;
-	unsigned int cols;
-	Cell** cells;
+namespace impl {
+	class Board {
+		const uint rows;
+		const uint cols;
 
-	void PlaceRandom(float density, unsigned int seed);
+		std::vector<std::vector<Cell>> cells;
 
-public:
+	public:
+		Board(uint rows, uint cols, float density = .3, uint seed = 1); // Constructor
 
-	Board(unsigned int rows, unsigned int cols, float density = .3, unsigned int seed = 1); // Constructor
-	~Board(); // Destructor
+		void Step();
+		void Draw(bool full_draw) const;
 
-	void Step();
-	void Draw(bool full_draw);
-};
-
-
-#endif //GAMEOFLIFE_BOARD_H
+	private:
+		void PlaceRandom(float density, uint seed);
+	};
+}

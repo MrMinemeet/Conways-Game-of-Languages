@@ -1,22 +1,20 @@
-#ifndef GAMEOFLIFE_CELL_H
-#define GAMEOFLIFE_CELL_H
+#pragma once
 
+namespace impl {
+	class Cell {
+		bool is_alive_next;
+		bool is_alive;
+		bool changed;
 
-class Cell {
-private:
-	bool is_alive_next;
+	public:
+		Cell(); // Constructor
 
-public:
-	bool is_alive;
-	bool changed;
-
-	Cell(); // Constructor
-
-	// Methods
-	void CalculateNextStep(unsigned short alive_neighbours);
-	void Step();
-	void Draw() const;
-};
-
-
-#endif //GAMEOFLIFE_CELL_H
+		// Methods
+		void CalculateNextStep(unsigned short alive_neighbours);
+		void Step();
+		void Draw() const;
+		void SetAlive(bool alive);
+		[[nodiscard]] bool IsAlive() const;
+		[[nodiscard]] bool Changed() const;
+	};
+}
