@@ -1,3 +1,6 @@
+// Copyright (c) 2025 Alexander Voglsperger.
+// This code is licensed under the MIT license.
+
 #pragma once
 
 #include <vector>
