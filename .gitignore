@@ -1,17 +1,9 @@
-
 *.cache
 
-GameOfLife/GameOfLife/bin/Debug/
-GameOfLife/GameOfLife/bin/Release/
+# Build directories
+**/*[Bb]uild*/
+**/*[Dd]ebug*/
+**/*[Rr]elease*/
 
-GameOfLife/GameOfLife/obj/Debug/
-GameOfLife/GameOfLife/obj/Release/
-CPP/GameOfLife/cmake-build-debug
-
-CPP/GameOfLife/.idea/
-
-CPP/GameOfLife/cmake-build-release/
-
-Go/.vscode/
-
-Go/.idea/
+**/.idea/
+**/.vscode/
