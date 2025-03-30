@@ -1,0 +1,14 @@
+{
+  "name": "conways-game-of-life",
+  "version": "1.0.0",
+  "description": "Conway's Game of Life in JS",
+  "private": true,
+  "main": "GameOfLife.js",
+  "keywords": [],
+  "author": "Alexander Voglsperger",
+  "license": "MIT",
+  "packageManager": "pnpm@10.5.1",
+  "devDependencies": {
+    "@types/node": "^22.13.14"
+  }
+}
